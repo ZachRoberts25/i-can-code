@@ -1,0 +1,2 @@
+class Repl < ApplicationRecord
+end

@@ -1,0 +1,49 @@
+// # Place all the behaviors and hooks related to the matching controller here.
+// # All this logic will automatically be available in application.js.
+// # You can use CoffeeScript in this file: http://coffeescript.org/
+
+var TOKEN;
+$(document).ready(function(){
+$.ajax({
+  url: '/gen_token',
+  success: function(data){
+    console.log("token generated");
+    // console.log(data);
+    TOKEN = {time_created: data.time_created, msg_mac: data.msg_mac};
+    var repl = new ReplitClient('api.repl.it', '80', 'ruby', TOKEN);
+
+    repl.connect().then(
+      function() {
+        document.querySelector('.status').innerHTML = 'connected';
+        start();
+      },
+      function() {
+        document.querySelector('.status').innerHTML = 'failed';
+      }
+    );
+
+    function start() {
+      document.querySelector('button').onclick = function() {
+        repl.evaluate(
+          document.querySelector('input').value,
+          {
+            stdout: function(str) {
+              document.querySelector('.out').innerHTML += str + '\n';
+            }
+          }
+        ).then(
+          function(result) {
+            document.querySelector('.result').innerHTML += (result.error || result.data) + '\n';
+          },
+          function(err) {
+            console.error(err);
+          }
+        );
+      };
+    }
+  }
+})
+});
+
+
+  console.log(TOKEN);
