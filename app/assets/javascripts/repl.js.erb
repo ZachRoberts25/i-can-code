@@ -50,7 +50,7 @@ var execute = function(firepad, lang){
     if(lang === "java"){
       firepad.setText('class Main{public static void main(String[] args){System.out.println("hello world");}}');
     }else if(lang === "ruby"){
-      firepad.setText("#This is Ruby")
+      firepad.setText(rubyProgram)
     }
   })
 };
@@ -75,10 +75,10 @@ function start(repl) {
   $( "#runcode" ).on('click', function() {
     $(".out").empty();
     // document.querySelector('.out').innerHTML = "";
-
+    // document.querySelector('.out').innerHTML += spiner;
     fire_text = firepad.getText();
-    console.log(fire_text);
-    repl.evaluate(
+
+    repl.evaluateOnce(
       fire_text,
       {
         stdout: function(str) {
@@ -88,9 +88,10 @@ function start(repl) {
     ).then(
       function(result) {
         // document.querySelector('.result').innerHTML += (result.error || result.data) + '\n';
+
       },
       function(err) {
-        console.error(err);
+        // console.error(err);
       }
     );
   });
