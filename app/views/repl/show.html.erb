@@ -1,5 +1,26 @@
-<div class="status">connecting..</div>
-<input/>
-<button>run</button>
-<pre class="result">results: </pre>
-<pre class="out">output: </pre>
+
+<br>
+
+
+<button style="margin-left: 10px; margin-bottom: 10px;" class="topbuttons cyan lighten-2 btn" id="runcode">RUN</button>
+<div class="language">
+
+</div>
+
+
+<div class="status">Connecting...</div>
+<br>
+<a class='dropdown-button btn' href='#' data-activates='dropdown1'>Language</a>
+ <!-- Dropdown Structure -->
+ <ul id='dropdown1' class='dropdown-content'>
+   <li id="ruby"><a href="#!">Ruby</a></li>
+   <li id="java"><a href="#!">Java</a></li>
+ </ul>
+<br>
+<br>
+<div style="width: 100%; overflow: hidden;">
+<div class="console" id="firepad-container" style="float: left;"></div>
+<div class="console2 pad" style="float:right; width: 60%; overflow: hidden;"><pre class="out"></pre>
+  <div id="firechat-wrapper" style="float:right;"></div>
+</div>
+</div>
