@@ -5,7 +5,7 @@
 
 var repl;
 var TOKEN;
-var myselect = "java";
+var myselect = "ruby";
 var startToken = function(lang){
   $(".out").empty();
   $.ajax({
@@ -32,6 +32,7 @@ var main = function(token, lang){
 
 }
 var fire_text = "";
+var firepad;
 var init = function(lang) {
   //// Initialize Firebase.
   var firepadRef = getRef();
@@ -41,17 +42,16 @@ var init = function(lang) {
   session.setUseWrapMode(true);
   session.setUseWorker(false);
   session.setMode('ace/mode/' + lang);
-  console.log(lang)
-    var firepad = Firepad.fromACE(firepadRef, editor)
-
-
-
-  console.log(firepad)
-  execute(firepad)
+  firepad = Firepad.fromACE(firepadRef, editor)
+  execute(firepad, lang)
 }
-var execute = function(firepad){
+var execute = function(firepad, lang){
   firepad.on("ready", function(){
-    fire_text = firepad.getText();
+    if(lang === "java"){
+      firepad.setText('class Main{public static void main(String[] args){System.out.println("hello world");}}');
+    }else if(lang === "ruby"){
+      firepad.setText("#This is Ruby")
+    }
   })
 };
 
@@ -75,6 +75,9 @@ function start(repl) {
   $( "#runcode" ).on('click', function() {
     $(".out").empty();
     // document.querySelector('.out').innerHTML = "";
+
+    fire_text = firepad.getText();
+    console.log(fire_text);
     repl.evaluate(
       fire_text,
       {
@@ -98,7 +101,6 @@ function start(repl) {
 
 $(document).on('turbolinks:load', function(){
   startToken(myselect);
-
   // jsFunction returns the language to run the code in :)
   init(myselect);
 
@@ -113,7 +115,6 @@ $(document).on('turbolinks:load', function(){
 
 });
 $(document).on('change', function(){
-
   startToken(jsFunction());
   init(jsFunction());
 
