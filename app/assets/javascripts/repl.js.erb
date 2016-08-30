@@ -49,8 +49,10 @@ var execute = function(firepad, lang){
   firepad.on("ready", function(){
     if(lang === "java"){
       firepad.setText(javaProgram);
+
     }else if(lang === "ruby"){
       firepad.setText(rubyProgram)
+
     }
   })
 };
@@ -100,23 +102,19 @@ function start(repl) {
 
 
 
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   startToken(myselect);
   // jsFunction returns the language to run the code in :)
   init(myselect);
-
   $("#java").on("click", function(){
       myselect = "java";
-
   })
   $("#ruby").on("click", function(){
     myselect = "ruby";
-
   })
-
 });
-$(document).on('change', function(){
-  startToken(jsFunction());
-  init(jsFunction());
-
-})
+// $(document).on('change', function(){
+//   startToken(jsFunction());
+//   init(jsFunction());
+//
+// })
