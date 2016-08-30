@@ -48,7 +48,7 @@ var init = function(lang) {
 var execute = function(firepad, lang){
   firepad.on("ready", function(){
     if(lang === "java"){
-      firepad.setText('class Main{public static void main(String[] args){System.out.println("hello world");}}');
+      firepad.setText(javaProgram);
     }else if(lang === "ruby"){
       firepad.setText(rubyProgram)
     }
