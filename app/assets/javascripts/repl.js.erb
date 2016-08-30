@@ -5,19 +5,19 @@
 
 var repl;
 var TOKEN;
-var myselect = "ruby";
+var lang = "ruby";
 var startToken = function(lang){
   $(".out").empty();
   $.ajax({
     url: '/gen_token',
     success: function(data){
       TOKEN = {time_created: data.time_created, msg_mac: data.msg_mac};
-      main(TOKEN, lang);
+      connectRepl(TOKEN, lang);
     }
   });
 }
 
-var main = function(token, lang){
+var connectRepl = function(token, lang){
   repl = new ReplitClient('api.repl.it', '80', lang, TOKEN);
   repl.connect().then(
     function() {
@@ -31,57 +31,17 @@ var main = function(token, lang){
 
 
 }
-var fire_text = "";
-var firepad;
-var init = function(lang) {
-  //// Initialize Firebase.
-  var firepadRef = getRef();
-  var editor = ace.edit("firepad-container");
-  editor.setTheme("ace/theme/textmate");
-  var session = editor.getSession();
-  session.setUseWrapMode(true);
-  session.setUseWorker(false);
-  session.setMode('ace/mode/' + lang);
-  firepad = Firepad.fromACE(firepadRef, editor)
-  execute(firepad, lang)
-}
-var execute = function(firepad, lang){
-  firepad.on("ready", function(){
-    if(lang === "java"){
-      firepad.setText(javaProgram);
 
-    }else if(lang === "ruby"){
-      firepad.setText(rubyProgram)
 
-    }
-  })
-};
-
-var getRef = function() {
-  // var ref = new Firebase('https://firepad.firebaseio-demo.com');
-  var ref = new Firebase('https://firepadcollap.firebaseio.com/firepad');
-  var hash = window.location.hash.replace(/#/g, '');
-  if (hash) {
-    ref = ref.child(hash);
-  } else {
-    ref = ref.push(); // generate unique location.
-    window.location = window.location + '#' + ref.key(); // add it as a hash to the URL.
-  }
-  if (typeof console !== 'undefined')
-  // console.log('Firebase data: ', ref.toString());
-  return ref;
-
-}
 function start(repl) {
 
   $( "#runcode" ).on('click', function() {
     $(".out").empty();
     // document.querySelector('.out').innerHTML = "";
     // document.querySelector('.out').innerHTML += spiner;
-    fire_text = firepad.getText();
-
+    text = firepad.getText();
     repl.evaluateOnce(
-      fire_text,
+      text,
       {
         stdout: function(str) {
           document.querySelector('.out').innerHTML += str;
@@ -99,22 +59,19 @@ function start(repl) {
   });
 }
 
-
-
-
-$(document).on('ready', function(){
-  startToken(myselect);
+$(document).on('ready', function(e){
+  startToken("ruby");
   // jsFunction returns the language to run the code in :)
-  init(myselect);
-  $("#java").on("click", function(){
-      myselect = "java";
-  })
-  $("#ruby").on("click", function(){
-    myselect = "ruby";
-  })
+
 });
 // $(document).on('change', function(){
 //   startToken(jsFunction());
-//   init(jsFunction());
+//   createFirepad(jsFunction());
 //
 // })
+$("#java").on("click", function(){
+
+})
+$("#ruby").on("click", function(){
+  myselect = "ruby"
+})
