@@ -26,7 +26,7 @@ gem 'sweetalert-rails'
 gem 'font-awesome-sass'
 gem 'materialize-sass'
 gem 'hirb'
-gem 'sweetalert-rails'
+gem 'codemirror-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -35,7 +35,7 @@ gem 'sweetalert-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'rails_12factor'
-gem 'faker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
