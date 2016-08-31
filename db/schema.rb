@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831220954) do
+ActiveRecord::Schema.define(version: 20160831222244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20160831220954) do
     t.datetime "updated_at",   null: false
     t.index ["character_id"], name: "index_characterstarships_on_character_id", using: :btree
     t.index ["starship_id"], name: "index_characterstarships_on_starship_id", using: :btree
+  end
+
+  create_table "charactervehicles", force: :cascade do |t|
+    t.integer  "character_id"
+    t.integer  "vehicle_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["character_id"], name: "index_charactervehicles_on_character_id", using: :btree
+    t.index ["vehicle_id"], name: "index_charactervehicles_on_vehicle_id", using: :btree
   end
 
   create_table "filmcharacters", force: :cascade do |t|
@@ -138,4 +147,6 @@ ActiveRecord::Schema.define(version: 20160831220954) do
 
   add_foreign_key "characters", "planets"
   add_foreign_key "characters", "species"
+  add_foreign_key "charactervehicles", "characters"
+  add_foreign_key "charactervehicles", "vehicles"
 end

@@ -79,7 +79,17 @@ def add_characters_to_starships
     end
   end
 end
-
+def add_characters_to_starships
+  if !Charactervehicle.take
+    people = get_all("people")
+    people.each do |peep|
+      vehicles = peep["vehicles"]
+      vehicles.each do |vehicle|
+        Charactervehicle.create(vehicle: Vehicle.find_by(url: vehicle), character: Character.find_by(name: peep["name"]))
+      end
+    end
+  end
+end
 
   populate_database(Starship, "starships")
   populate_database(Character, "people")
@@ -88,4 +98,5 @@ end
   populate_database(Planet, "planets")
   populate_database(Film, "films")
   add_characters_to_films
+  add_characters_to_starships
   add_characters_to_starships
