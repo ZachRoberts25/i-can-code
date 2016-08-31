@@ -8,6 +8,7 @@
 
 
 #This is to fetch the data api, and return it
+Character.destroy_all
 def get_all(type)
   array = []
   url = "http://swapi.co/api/"
@@ -24,44 +25,27 @@ def get_all(type)
   end
   array
 end
-#This creates 87 characters and puts it in our database
-# if StarwarsCharacter.all.size == 0
-#   get_all("people").each do |person|
-#     character = StarwarsCharacter.new()
-#     person.each do |k,v|
-#       if StarwarsCharacter.column_names.include?(k)
-#         character.update(k => v)
-#         character.save
-#       end
-#     end
-#   end
-# end
-# if Starship.all.size == 0
-#   get_all("starships").each do |starship|
-#     new_starship = Starship.new()
-#     starship.each do |k,v|
-#       if Starship.column_names.include?(k)
-#         new_starship.update(k => v)
-#         new_starship.save
-#       end
-#     end
-#   end
-# end
+
 def populate_database(model_type, type)
   if model_type.all.size == 0
-    get_all(type).each do |type1|
-      new_data = model_type.new
-      type1.each do |k,v|
+    get_all(type).each do |content|
+      @new_data = model_type.new
+      content.each do |k,v|
         if model_type.column_names.include?(k)
-          new_data.update(k => v)
-          new_data.save
+          #Used this for relationship between planet and people
+          # if k == "homeworld"
+          #   @new_data.planet = Planet.find_by(url: v)
+          # end
+          @new_data.assign_attributes(k => v)
         end
       end
+      @new_data.save!
     end
+
   end
 end
 populate_database(Starship, "starships")
-populate_database(StarwarsCharacter, "people")
+populate_database(Character, "people")
 populate_database(Vehicle, "vehicles")
 populate_database(Species, "species")
 populate_database(Planet, "planets")
