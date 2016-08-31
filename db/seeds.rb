@@ -36,7 +36,7 @@ def populate_database(model_type, type)
       @new_data = model_type.new
       content.each do |k,v|
         #Takes care of character belongs to a species relationship
-        if k == "species"
+        if k == "species" && model_type.class == Character
           if v.empty?
             @new_data.species = Species.find_by(name: "unknown")
           else
@@ -57,9 +57,21 @@ def populate_database(model_type, type)
   end
 end
 
+def add_characters_to_films
+  people = get_all("people")
+  people.each do |peep|
+    films = peep["films"]
+    films.each do |film|
+      Filmcharacter.create(film: Film.find_by(url: film), character: Character.find_by(name: peep["name"]))
+    end
+
+  end
+end
+
 populate_database(Starship, "starships")
 populate_database(Character, "people")
 populate_database(Vehicle, "vehicles")
 populate_database(Species, "species")
 populate_database(Planet, "planets")
 populate_database(Film, "films")
+add_characters_to_films
