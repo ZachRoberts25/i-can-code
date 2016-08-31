@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831190124) do
+ActiveRecord::Schema.define(version: 20160831194051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,9 @@ ActiveRecord::Schema.define(version: 20160831190124) do
     t.datetime "updated_at", null: false
     t.integer  "planet_id"
     t.string   "homeworld"
+    t.integer  "species_id"
     t.index ["planet_id"], name: "index_characters_on_planet_id", using: :btree
+    t.index ["species_id"], name: "index_characters_on_species_id", using: :btree
   end
 
   create_table "films", force: :cascade do |t|
@@ -117,4 +119,5 @@ ActiveRecord::Schema.define(version: 20160831190124) do
   end
 
   add_foreign_key "characters", "planets"
+  add_foreign_key "characters", "species"
 end

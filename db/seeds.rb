@@ -8,7 +8,11 @@
 
 
 #This is to fetch the data api, and return it
-Character.destroy_all
+# Character.destroy_all
+if !Species.find_by(name: "unknown")
+Species.create(name: "unknown")
+end
+
 def get_all(type)
   array = []
   url = "http://swapi.co/api/"
@@ -31,11 +35,18 @@ def populate_database(model_type, type)
     get_all(type).each do |content|
       @new_data = model_type.new
       content.each do |k,v|
+        if k == "species"
+          if v.empty?
+            puts "this is happening?"
+            @new_data.species = Species.find_by(name: "unknown")
+          else
+              @new_data.species = Species.find_by(url: v[0])
+          end
+        end
         if model_type.column_names.include?(k)
-          #Used this for relationship between planet and people
-          # if k == "homeworld"
-          #   @new_data.planet = Planet.find_by(url: v)
-          # end
+          if k == "homeworld"
+            @new_data.planet = Planet.find_by(url: v)
+          end
           @new_data.assign_attributes(k => v)
         end
       end
@@ -44,22 +55,10 @@ def populate_database(model_type, type)
 
   end
 end
+
 populate_database(Starship, "starships")
 populate_database(Character, "people")
 populate_database(Vehicle, "vehicles")
 populate_database(Species, "species")
 populate_database(Planet, "planets")
 populate_database(Film, "films")
-
-
-# if Starship.all.size == 0
-#   get_all("starships").each do |starship|
-#     new_starship = Starship.new()
-#     starship.each do |k,v|
-#       if Starship.column_names.include?(k)
-#         new_starship.update(k => v)
-#         new_starship.save
-#       end
-#     end
-#   end
-# end
