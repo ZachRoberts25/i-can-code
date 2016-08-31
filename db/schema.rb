@@ -10,14 +10,76 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831144124) do
+ActiveRecord::Schema.define(version: 20160831151826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "films", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "episode_id"
+    t.string   "opening_crawl"
+    t.string   "director"
+    t.string   "producer"
+    t.date     "release_date"
+    t.string   "url"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "planets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "diameter"
+    t.string   "rotation_period"
+    t.string   "orbital_period"
+    t.string   "gravity"
+    t.string   "population"
+    t.string   "climate"
+    t.string   "terrain"
+    t.string   "surface_water"
+    t.string   "url"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "repls", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "species", force: :cascade do |t|
+    t.string   "name"
+    t.string   "classification"
+    t.string   "designation"
+    t.string   "average_height"
+    t.string   "average_lifespan"
+    t.string   "eye_colors"
+    t.string   "hair_colors"
+    t.string   "skin_colors"
+    t.string   "language"
+    t.string   "homeworld"
+    t.string   "url"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "starships", force: :cascade do |t|
+    t.string   "name"
+    t.string   "model"
+    t.string   "starship_class"
+    t.string   "manufacturer"
+    t.string   "cost_in_credits"
+    t.string   "length"
+    t.string   "crew"
+    t.string   "passengers"
+    t.string   "max_atmosphering_speed"
+    t.string   "hyperdrive_rating"
+    t.string   "MGLT"
+    t.string   "cargo_capacity"
+    t.string   "consumables"
+    t.string   "url"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "starwars_characters", force: :cascade do |t|
@@ -32,6 +94,23 @@ ActiveRecord::Schema.define(version: 20160831144124) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "model"
+    t.string   "vehicle_class"
+    t.string   "manufacturer"
+    t.string   "length"
+    t.string   "cost_in_credits"
+    t.string   "crew"
+    t.string   "passengers"
+    t.string   "max_atmsophering_speed"
+    t.string   "cargo_capacity"
+    t.string   "consumables"
+    t.string   "url"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
