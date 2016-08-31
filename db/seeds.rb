@@ -35,15 +35,16 @@ def populate_database(model_type, type)
     get_all(type).each do |content|
       @new_data = model_type.new
       content.each do |k,v|
+        #Takes care of character belongs to a species relationship
         if k == "species"
           if v.empty?
-            puts "this is happening?"
             @new_data.species = Species.find_by(name: "unknown")
           else
-              @new_data.species = Species.find_by(url: v[0])
+            @new_data.species = Species.find_by(url: v[0])
           end
         end
         if model_type.column_names.include?(k)
+          #Takes care of character belongs to homeworld relationship
           if k == "homeworld"
             @new_data.planet = Planet.find_by(url: v)
           end
