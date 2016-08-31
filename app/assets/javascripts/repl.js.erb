@@ -8,7 +8,6 @@ var TOKEN;
 var lang = "ruby";
 var myCodeMirror;
 var startToken = function(lang){
-  $(".out").empty();
   $.ajax({
     url: '/gen_token',
     success: function(data){
@@ -42,7 +41,6 @@ function start(repl) {
     // document.querySelector('.out').innerHTML += spiner;
 
     text = myCodeMirror.getValue();
-    text
     repl.evaluateOnce(
       text,
       {
@@ -62,7 +60,7 @@ function start(repl) {
   });
 }
 
-$(window).on('load', function(e){
+$(document).on('ready', function(e){
   startToken("ruby");
   myCodeMirror = CodeMirror(document.querySelector('.in'), {
     value: rubyProgram,
