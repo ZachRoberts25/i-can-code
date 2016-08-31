@@ -10,7 +10,7 @@
 #This is to fetch the data api, and return it
 # Character.destroy_all
 if !Species.find_by(name: "unknown")
-Species.create(name: "unknown")
+  Species.create(name: "unknown")
 end
 
 def get_all(type)
@@ -58,20 +58,34 @@ def populate_database(model_type, type)
 end
 
 def add_characters_to_films
-  people = get_all("people")
-  people.each do |peep|
-    films = peep["films"]
-    films.each do |film|
-      Filmcharacter.create(film: Film.find_by(url: film), character: Character.find_by(name: peep["name"]))
+  if !Filmcharacter.take
+    people = get_all("people")
+    people.each do |peep|
+      films = peep["films"]
+      films.each do |film|
+        Filmcharacter.create(film: Film.find_by(url: film), character: Character.find_by(name: peep["name"]))
+      end
     end
-
+  end
+end
+def add_characters_to_starships
+  if !Characterstarship.take
+    people = get_all("people")
+    people.each do |peep|
+      starships = peep["starships"]
+      starships.each do |starship|
+        Characterstarship.create(starship: Starship.find_by(url: starship), character: Character.find_by(name: peep["name"]))
+      end
+    end
   end
 end
 
-populate_database(Starship, "starships")
-populate_database(Character, "people")
-populate_database(Vehicle, "vehicles")
-populate_database(Species, "species")
-populate_database(Planet, "planets")
-populate_database(Film, "films")
-add_characters_to_films
+
+  populate_database(Starship, "starships")
+  populate_database(Character, "people")
+  populate_database(Vehicle, "vehicles")
+  populate_database(Species, "species")
+  populate_database(Planet, "planets")
+  populate_database(Film, "films")
+  add_characters_to_films
+  add_characters_to_starships

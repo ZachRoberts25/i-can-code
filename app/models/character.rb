@@ -3,4 +3,6 @@ class Character < ApplicationRecord
   belongs_to :species
   has_many :filmcharacters
   has_many :films, through: :filmcharacters
+  has_many :characterstarships
+  has_many :starships, through: :characterstarships
 end
