@@ -1,0 +1,2 @@
+class StarwarsCharacter < ApplicationRecord
+end
