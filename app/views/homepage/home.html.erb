@@ -1,4 +1,9 @@
-<%= link_to 'REPL', repl_path %>
+<form class="searchbox_1" action="">
+<input type="search" class="search_1" placeholder="Try Luke Skywalker" />
+<button type="submit" class="submit_1" value="search">search</button>
+</form>
 
 
-<%= link_to "STARWARS", startwars_home_path %>
+<div class="results">
+  <%= render 'search' %>
+</div>
