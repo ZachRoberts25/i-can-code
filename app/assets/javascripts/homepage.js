@@ -9,8 +9,9 @@ $(document).on("ready", function(){
       data: {results: $(".search_1").val()},
       method: 'post',
       success: function(data){
+        console.log(data)
         response = $(data).find('#results').html()
-        console.log(response)
+        // console.log(response)
         $('#results').html(response)
       }
     })
