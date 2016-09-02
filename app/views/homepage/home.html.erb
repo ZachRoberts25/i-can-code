@@ -1,9 +1,16 @@
-<form class="searchbox_1" action="">
+
+<div class="fullpage">
+
+<form class="searchbox_1" action="/" method="post" data-remote="true">
 <input type="search" class="search_1" placeholder="Try Luke Skywalker" />
 <button type="submit" class="submit_1" value="search">search</button>
 </form>
 
-
 <div class="results">
-  <%= render 'search' %>
+  <% if @results %>
+  <% @results.each do |result| %>
+    <%= result.name %>
+  <% end %>
+  <% end %>
+</div>
 </div>
