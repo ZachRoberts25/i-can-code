@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'homepage#home'
   get '/home' => "homepage#home"
   post '/' => "homepage#home"
+  get '/' => "homepage#home"
 end

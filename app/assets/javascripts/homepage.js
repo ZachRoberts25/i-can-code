@@ -7,20 +7,12 @@ $(document).on("ready", function(){
     $.ajax({
       url: '/',
       data: {results: $(".search_1").val()},
-      method: 'post'
-      // success: function(data){
-      //   $(".results").load("/ .results")
-      // }
-      // console.log(typeOf(data));
-      // $(".results").html(data);
-    // }
+      method: 'post',
+      success: function(data){
+        response = $(data).find('#results').html()
+        console.log(response)
+        $('#results').html(response)
+      }
     })
-    $('.results').on('ajax:success', function(){
-      console.log("this")
-      $(this).load('/ .results')
-    });
   })
-
-
-   });
 })
