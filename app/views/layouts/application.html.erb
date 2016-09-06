@@ -5,13 +5,14 @@
     <%= csrf_meta_tags %>
 
     <link href="http://fonts.googleapis.com/css?family=Cabin:400" rel="stylesheet">
-
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   </head>
 
   <body>
     <%= yield %>
   </body>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 </html>

@@ -9,6 +9,13 @@
 
 #This is to fetch the data api, and return it
 # Character.destroy_all
+
+model = [Charactervehicle, Characterstarship, Filmcharacter, Character, Species, Planet, Film,  Vehicle, Starship]
+model.each do |mod|
+  mod.destroy_all
+end
+
+
 if !Species.find_by(name: "unknown")
   Species.create(name: "unknown")
 end
@@ -31,26 +38,29 @@ def get_all(type)
 end
 
 def populate_database(model_type, type)
-  if model_type.all.size == 0
+  if model_type.all.size == 0 || model_type.all.size == 1
     get_all(type).each do |content|
       @new_data = model_type.new
       content.each do |k,v|
         #Takes care of character belongs to a species relationship
-        if k == "species" && model_type.class == Character
+        if k == "species" && model_type == Character
           if v.empty?
             @new_data.species = Species.find_by(name: "unknown")
           else
+            # p v[0]
+            # p Species.find_by(url: v[0])
             @new_data.species = Species.find_by(url: v[0])
           end
         end
         if model_type.column_names.include?(k)
           #Takes care of character belongs to homeworld relationship
-          if k == "homeworld"
+          if k == "homeworld" && model_type == Character
             @new_data.planet = Planet.find_by(url: v)
           end
           @new_data.assign_attributes(k => v)
         end
       end
+      p @new_data
       @new_data.save!
     end
 
@@ -91,11 +101,11 @@ def add_characters_to_starships
   end
 end
 
+  populate_database(Planet, "planets")
+  populate_database(Species, "species")
   populate_database(Starship, "starships")
   populate_database(Character, "people")
   populate_database(Vehicle, "vehicles")
-  populate_database(Species, "species")
-  populate_database(Planet, "planets")
   populate_database(Film, "films")
   add_characters_to_films
   add_characters_to_starships

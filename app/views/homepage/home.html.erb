@@ -1,17 +1,22 @@
 
 <div class="fullpage">
 
-<form class="searchbox_1" action="">
-<input type="search" class="search_1" placeholder="Try Luke Skywalker" />
-<button type="submit" class="submit_1" value="search">search</button>
-</form>
+  <h3 class="title">STARWARS SEARCH ENGINE</h3>
+  <form class="searchbox_1" action="">
+    <input type="search" class="search_1" placeholder="Try Luke Skywalker" />
+    <button type="submit" class="submit_1" value="search">search</button>
+  </form>
+  <div id="results">
+    <% if !@results.empty? %>
+      <ul>
+      <% @results.each do |result| %>
 
-<div id="results">
-  <% if @results %>
-  <% @results.each do |result| %>
-    <%= link_to result.name %>
-  <% end %>
-  <% end %>
-</div>
-</div>
+            <li class="li_result"><%= link_to result.name, controller: result.class.to_s.downcase, action: "show", id: result.id %></li>
+      <% end %>
+    </ul>
+    <%= will_paginate @results %>
+    <% end %>
+
+  </div>
+
 </div>
