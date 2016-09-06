@@ -7,5 +7,8 @@
 <p>Hair Color: <%= @character.hair_color %></p>
 <p>Height: <%= @character.height %></p>
 <p>Mass: <%= @character.mass %></p>
-<p>Homeworld: <%= @character.planet %></p>
-<p>Species: <%= @species %></p>
+<p>Homeworld: <%= @character.planet.name %></p>
+<p>Species: <%= @character.species.name fdsafs%></p>
+<% @character.starships.each do |starship|%>
+<p>Starships: <%=starship.name %></p>
+<% end %>

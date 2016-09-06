@@ -89,7 +89,7 @@ def add_characters_to_starships
     end
   end
 end
-def add_characters_to_starships
+def add_characters_to_vehicles
   if !Charactervehicle.take
     people = get_all("people")
     people.each do |peep|
@@ -109,4 +109,4 @@ end
   populate_database(Film, "films")
   add_characters_to_films
   add_characters_to_starships
-  add_characters_to_starships
+  add_characters_to_vehicles
