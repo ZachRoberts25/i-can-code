@@ -1,14 +1,27 @@
+<%= link_to "Back To Search", root_path%>
 <h1><%= @character.name %>'s Information </h1>
 
-
+<p> Type: Character </p>
 <p>Birth Year: <%= @character.birth_year %></p>
 <p>Eye Color: <%= @character.eye_color %></p>
 <p>Gender: <%= @character.gender %></p>
 <p>Hair Color: <%= @character.hair_color %></p>
 <p>Height: <%= @character.height %></p>
 <p>Mass: <%= @character.mass %></p>
-<p>Homeworld: <%= @character.planet.name %></p>
-<p>Species: <%= @character.species.name fdsafs%></p>
+<p>Homeworld: <%=link_to @planet.name, controller: "planet", action: "show", id: @planet.id %></p>
+<p>Species: <%=link_to  @species.name, controller: "species", action: "show", id: @species.id %></p>
+<p>Starships:
 <% @character.starships.each do |starship|%>
-<p>Starships: <%=starship.name %></p>
+  <%= link_to starship.name, controller: "starship", action: "show", id: starship.id  %>
 <% end %>
+</p>
+<p>Vehicles:
+<% @character.vehicles.each do |vehicle|%>
+  <%=link_to vehicle.name, controller: "vehicle", action: "show", id: vehicle.id %>
+<% end %>
+</p>
+<p>Films:
+<% @character.films.each do |film|%>
+  <%=link_to film.title , controller: "film", action: "show", id: film.id %>
+<% end %>
+</p>

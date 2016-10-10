@@ -1,2 +1,0 @@
-class Repl < ApplicationRecord
-end

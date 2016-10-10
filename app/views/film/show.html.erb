@@ -1,0 +1,17 @@
+<%= link_to "Back To Search", root_path %>
+
+
+<h1><%= @film.title %>'s Information</h1>
+
+
+<p>Type: Film </p>
+<p>Opening: <%= link_to "Opening Crawl", controller: "film", action: "opening", id: @film.id%> </p>
+<p>Episode Id: <%= @film.episode_id %></p>
+<p>Director: <%= @film.director %></p>
+<p>Producer: <%= @film.producer %></p>
+<p>Release Date: <%= @film.release_date %></p>
+<p>Characters:
+<% @film.characters.each do |character|%>
+  <%= link_to character.name, controller: "character", action: "show", id: character.id  %>
+<% end %>
+</p>

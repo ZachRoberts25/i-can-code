@@ -10,8 +10,12 @@
     <% if !@results.empty? %>
       <ul>
       <% @results.each do |result| %>
-
+            <% if result.class == Film %>
+              <% puts "Hello" %>
+              <li class="li_result"><%= link_to result.title, controller: result.class.to_s.downcase, action: "show", id: result.id %></li>
+            <%else%>
             <li class="li_result"><%= link_to result.name, controller: result.class.to_s.downcase, action: "show", id: result.id %></li>
+            <% end %>
       <% end %>
     </ul>
     <%= will_paginate @results %>

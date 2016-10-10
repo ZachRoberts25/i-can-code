@@ -1,0 +1,18 @@
+<%= link_to "Back To Search", root_path%>
+
+<h1><%= @planet.name %>'s Information </h1>
+
+<p> Type: Planet </p>
+<p>Diameter: <%= @planet.diameter %></p>
+<p>Rotation Period: <%= @planet.rotation_period %></p>
+<p>Orbital Peroid: <%= @planet.orbital_period %></p>
+<p>Gravity: <%= @planet.gravity %></p>
+<p>Population: <%= @planet.population %></p>
+<p>Climate: <%= @planet.climate %></p>
+<p>Terrain: <%= @planet.terrain %></p>
+<p>Surface Water: <%= @planet.surface_water %></p>
+<p>Characters:
+<% @planet.characters.each do |character|%>
+  <%= link_to character.name, controller: "character", action: "show", id: character.id  %>
+<% end %>
+</p>

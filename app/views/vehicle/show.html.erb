@@ -1,0 +1,17 @@
+<%= link_to "Back To Search", root_path %>
+
+
+<h1><%= @vehicle.name %>'s Information</h1>
+
+<p> Type: Vehicle </p>
+<% @array.each do |arr| %>
+<% if @vehicle.send(arr).nil? %>
+<% next %>
+<% end %>
+<p>  <%= "#{arr}: " +  @vehicle.send(arr) %> </p>
+<% end %>
+<p>Characters:
+<% @vehicle.characters.each do |character|%>
+  <%= link_to character.name, controller: "character", action: "show", id: character.id  %>
+<% end %>
+</p>

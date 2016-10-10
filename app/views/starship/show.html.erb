@@ -1,0 +1,14 @@
+<%= link_to "Back To Search", root_path %>
+
+
+<h1><%= @starship.name %>'s Information</h1>
+
+<p> Type: Starship </p>
+<% @array.each do |arr| %>
+<p>  <%="#{arr}: " + @starship.send(arr) %> </p>
+<% end %>
+<p>Characters:
+<% @starship.characters.each do |character|%>
+  <%= link_to character.name, controller: "character", action: "show", id: character.id  %>
+<% end %>
+</p>

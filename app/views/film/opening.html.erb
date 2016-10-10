@@ -1,0 +1,10 @@
+<%= link_to "Back To Search", root_path %><br>
+<%= link_to "Back to Film", controller: "film", action: "show", id: @film.id %>
+<div id="titles"><div id="titlecontent">
+
+	<p>
+    <span class="title"> <%=@film.title %> </span><br>
+    <%= @film.opening_crawl %>
+  </p>
+
+</div></div>

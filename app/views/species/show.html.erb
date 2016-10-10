@@ -1,0 +1,16 @@
+<%= link_to "Back To Search", root_path %>
+
+
+<h1><%= @species.name %>'s Information</h1>
+
+<p> Type: Species </p>
+<p>Classification: <%= @species.designation %></p>
+<p>Average Height: <%= @species.average_height %></p>
+<p>Average Lifespan: <%= @species.average_lifespan %></p>
+<p>Eye Colors: <%= @species.eye_colors %></p>
+<p>Hair Colors: <%= @species.hair_colors %></p>
+<p>Skin Colors: <%= @species.skin_colors %></p>
+<p>Language: <%= @species.language %></p>
+<% if @planet %>
+<p>Planet: <%= @planet.name %></p>
+<% end %>
