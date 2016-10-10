@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#Deployment
 
-Things you may want to cover:
+git clone this current repository
+Make sure to have postgresql running, or you must change the database inside the rails application itself.   I sugguest just to use a postgresql database.
+run rake db:create rake db:migrate rake db:seed
+Running the seed file will access the starwars api and fill your database with all the information available and create the relations.
+If you want a better understanding of this, go to the seed.rb file
 
-* Ruby version
+After that just run the rails server and you are all set.  
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Have fun with it and please let me know of any issues or bugs 
